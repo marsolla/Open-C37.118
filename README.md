@@ -3,28 +3,28 @@ Open C37.118
 
 IEEE C37.118-2011 Synchrophasor Protocol Implementation
 
-The OpenC37.118 -2011 library was developed as a way of providing a means of communication Synchrophasor implementing the Protocol as per IEEE C37.118 -2011 .
+The OpenC37.118-2011 library was developed as a way of providing a means of communication Synchrophasor implementing the Protocol as per IEEE C37.118-2011.
 
-Fully developed in C + + , allows you to simply communicating via TCP / IP using the frames described the normative standard .
+Fully developed in C++, allows you to simply communicating via TCP/IP using the frames described the normative standard.
 
-Any application developed and supported by this language may make use of the features implemented .
+Any application developed and supported by this language may make use of the features implemented.
 
-Through the methods available , it is possible to encapsulate fasorais data , analog and digital measurements , or even information related to product functionality.
+Through the methods available, it is possible to encapsulate phasors data, analog and digital measurements, or even information related to product functionality.
 
 The library is divided into six classes:
 
 1 main class responsible for encapsulating common to all types of frame data.
 
-1 class mapping the structure of PMU ( PMU Station) , serving as a reference for storing characteristic data of the equipment.
+1 class mapping the structure of PMU (PMU Station) , serving as a reference for storing characteristic data of the equipment.
 
-The other 4 classes describe the 4 types of frames described in the protocol , they are:
+The other 4 classes describe the 4 types of frames described in the protocol, they are:
 
  ConfigFrame( 1 and 2 / / Setup 3 - To Do )
  HeaderFrame( )
  DataFrame( )
  CommandFrame( ) ;
 
-The entire operation of the equipment is made using the CommandFrame( ) , which contains the command to be executed by the machine. (Ex. Send Data ON / OFF Send Data ) .
+The entire operation of the equipment is made using the CommandFrame( ), which contains the command to be executed by the machine. (Ex. Send Data ON / Send Data OFF).
 
 All communication between devices starts with a configuration request command which reports through the FrameConfig( ) the current mode setting / available equipment.
 
@@ -32,24 +32,24 @@ Config 1 = Available
 Config 2 = Current
 Config 3 = To Do - Not available yet.
 
-Incoming or outgoing setup, this will tell you how the equipment is set up and what types of data to be transmitted .
+Incoming or outgoing setup, this will tell you how the equipment is set up and what types of data to be transmitted.
 
-Subsequently , the unit waits to receive a command from the beginning of data transmission as CommandFrame( ) sent .
+Subsequently, the unit waits to receive a command from the beginning of data transmission as CommandFrame( ) sent.
 
-DataFrame( ) , is responsible for encapsulating the measurements and transmit them
+DataFrame( ), is responsible for encapsulating the measurements and transmit them.
 
-The HeaderFrame( ) describes specific information about equipment , usually customized by the manufacturer / user ( eg Serial Number , SW Version) .
+The HeaderFrame( ) describes specific information about equipment, usually customized by the manufacturer/user (eg: Serial Number, SW Version).
 
-For each of the frames sent , it is necessary to fill out the data directly in the structures (BUFFER) before any transmission.
+For each of the frames sent, it is necessary to fill out the data directly in the structures (BUFFER) before any transmission.
 
 The pack( ) method is responsible for encapsulating a buffer of parameters in a specific frame as defined in the standard.
 
-When receiving a packet C37.118 , you should use the unpack( ) method on the type of frame received.
+When receiving a packet C37.118, you should use the unpack( ) method on the type of frame received.
 
 The information contained in this package are then copied to a buffer used by the application.
 
 Summary :
 
-TX : Create the object , populate the fields of the object , encapsulate with pack( ) and pass.
-RX : Create the object , receive the package , descanpsule with unpack( ) and read the values of the object's fields.
+TX : Create the object, populate the fields of the object, encapsulate with pack( ) and pass.
+RX : Create the object, receive the package, descanpsule with unpack( ) and read the values of the object's fields.
 In the examples folder it is possible to see the implementation of a PMU and PDC using the methods implemented and tested in a closed loop.
