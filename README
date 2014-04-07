@@ -1,0 +1,43 @@
+A biblioteca OpenC37.118-2011 foi desenvolvida pelo LSEE como forma de disponibilizar um meio de comunicação implementando o protocolo Syncrophasor normatizo segundo norma IEEE C37.118-2011.
+
+Totalmente desenvolvida em linguagem C++, permite de forma simples a comunicação via rede TCP/IP utilizando os frames descritos segundo o padrão normativo.
+Qualquer aplicação desenvolvida e compatível com esta linguagem pode fazer uso dos recursos implementados.
+
+Através dos métodos disponíveis, é possível encapsular dados fasorais, medições analógicas e digitais, ou ainda, informações relacionadaa à funcionalidade do equipamento.
+
+A biblioteca está divida em 6 classes:
+- 1 classe principal responsável por encapsular os dados comuns a todos os tipos de frame. 
+- 1 classe que mapeia uma estrutura de PMU, servindo como referência para armazenamento dos dados característicos do equipamento.
+	
+As 4 outras classes descrevem os 4 tipos de frames descritos no protocolo, são eles:
+ - Frame Config (1 e 2, //3- ToDo)
+ - Frame Header()
+ - Frame Data()
+ - Frame Command();
+
+ Toda operação do equipamento é feita utilizando o Frame Command(), que contém o comando a ser executado pelo equipamento. (Ex. Send Data ON / Send Data OFF).
+ 
+ Toda comunicação entre equipamentos inicia-se com um comando de pedido de configuração o qual informa atraves do Frame Config() o modo de configuração corrente/disponível no equipamento.
+ 	 Config 2 = corrente
+ 	 Config 1 = Disponível
+ 	 
+ Recebido ou enviado a configuração, esta informará como o equipamento e quais os tipos de dados que serão transmitidos.
+ 
+ Posteriormente, a unidade aguarda receber um comando de inicio de transmissao de dados, Frame Data()o qual é ligado e desligado também conforme Frame Command enviado.
+
+ Já O Frame Header() descreve informações específicas sobre equipamento, geralmente customizado pelo fabricante/usuário (Ex. Serial Number, SW Version).
+
+Para cada um dos frames enviados, faz-se necessário preencher os dados diretamente nas estruras antes de qualquer transmissão. 
+O método pack() é responsavel por encapsular um buffer de parametros em um frame específico conforme definido em norma.
+Ao receber um pacote C37.118, deve-se usar o método unpack() conforme o tipo de frame recebido.
+As informações contidas neste pacote, então são copiadas para um buffer, utilizado pela aplicação.
+
+Resumo: 
+TX:
+Crie o objeto, popule os campos do objeto, encapsule com pack() e transmita.
+
+RX:
+Crie o objeto, receba o pacote, descanpsule ele com unpack() e leia os valores dos campos do objeto.
+
+Na pasta examples é possivel ver a implementação de um PMU e um PDC utilizando os métodos implementados e testados em loop real.
+

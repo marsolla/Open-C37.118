@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>OpenC37118: Referência da Classe HEADER_Frame</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Gerado por Doxygen 1.7.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&nbsp;Principal</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Arquivos</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Lista&nbsp;de&nbsp;Componentes</span></a></li>
+      <li><a href="classes.html"><span>Índice&nbsp;dos&nbsp;Componentes</span></a></li>
+      <li><a href="hierarchy.html"><span>Hierarquia&nbsp;de&nbsp;Classes</span></a></li>
+      <li><a href="functions.html"><span>Componentes&nbsp;Membros</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Métodos Públicos</a> &#124;
+<a href="#pro-attribs">Atributos Protegidos</a>  </div>
+  <div class="headertitle">
+<h1>Referência da Classe HEADER_Frame</h1>  </div>
+</div>
+<div class="contents">
+<!-- doxytag: class="HEADER_Frame" --><!-- doxytag: inherits="C37118" -->
+<p><code>#include &lt;<a class="el" href="c37118header_8h_source.html">c37118header.h</a>&gt;</code></p>
+<div class="dynheader">
+Diagrama de Hierarquia para HEADER_Frame:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classHEADER__Frame.png" usemap="#HEADER_Frame_map" alt=""/>
+  <map id="HEADER_Frame_map" name="HEADER_Frame_map">
+<area href="classC37118.html" alt="C37118" shape="rect" coords="0,0,106,24"/>
+</map>
+</div>
+
+<p><a href="classHEADER__Frame-members.html">Lista de todos os Membros.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Métodos Públicos</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHEADER__Frame.html#a22d2214c9b277756dd3c5e1ee995f212">HEADER_Frame</a> (string <a class="el" href="classHEADER__Frame.html#a86426a5d00dda4112ecabb6f94376f9f">info</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHEADER__Frame.html#a11bd4bcdf32e92e38a19eb88397b8d12">DATA_set</a> (string value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHEADER__Frame.html#affa73a151823e09f022fe805fd801967">DATA_get</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned short&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHEADER__Frame.html#ab2d99a96ffb951b41f54517c64037e80">pack</a> (unsigned char **buff)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHEADER__Frame.html#acc61d05f2c52cccf5b87fa87612aee5a">unpack</a> (unsigned char *buffer)</td></tr>
+<tr><td colspan="2"><h2><a name="pro-attribs"></a>
+Atributos Protegidos</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHEADER__Frame.html#a86426a5d00dda4112ecabb6f94376f9f">info</a></td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Descrição Detalhada</h2>
+<p>C37.118-2011 HEADER FRAME CLASS Methods, Get/Set for each field to send and get Header Information Usualy is a developer data, like SerialNumber, Version, etc Note:DATA is a dynamic size, defined by user application Size(DATA) = Size(FRAMESIZE) - 16 bytes </p>
+<hr/><h2>Construtores &amp; Destrutores</h2>
+<a class="anchor" id="a22d2214c9b277756dd3c5e1ee995f212"></a><!-- doxytag: member="HEADER_Frame::HEADER_Frame" ref="a22d2214c9b277756dd3c5e1ee995f212" args="(string info)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HEADER_Frame::HEADER_Frame </td>
+          <td>(</td>
+          <td class="paramtype">string&nbsp;</td>
+          <td class="paramname"> <em>info</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>PUBLIC Methods from CLASS HEADER FRAME, Get/Set for each field Note: DATA is a dynamic size, defined by user application Size(DATA) = Size(FRAMESIZE) - 16 bytes Method Constructor Init the 2 first byte with Header Frame ID Add Header 0xAA|0x11 Set the default FRAMESIZE with 16 bytes. If use DATA field, please update the FRAMESIZE too. </p>
+
+</div>
+</div>
+<hr/><h2>Métodos</h2>
+<a class="anchor" id="affa73a151823e09f022fe805fd801967"></a><!-- doxytag: member="HEADER_Frame::DATA_get" ref="affa73a151823e09f022fe805fd801967" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string HEADER_Frame::DATA_get </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>GET Methods</p>
+<p>Get DATA Field from Header Frame </p>
+
+</div>
+</div>
+<a class="anchor" id="a11bd4bcdf32e92e38a19eb88397b8d12"></a><!-- doxytag: member="HEADER_Frame::DATA_set" ref="a11bd4bcdf32e92e38a19eb88397b8d12" args="(string value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HEADER_Frame::DATA_set </td>
+          <td>(</td>
+          <td class="paramtype">string&nbsp;</td>
+          <td class="paramname"> <em>value</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>SET Methods</p>
+<p>Set DATA Field from Header Frame </p>
+
+</div>
+</div>
+<a class="anchor" id="ab2d99a96ffb951b41f54517c64037e80"></a><!-- doxytag: member="HEADER_Frame::pack" ref="ab2d99a96ffb951b41f54517c64037e80" args="(unsigned char **buff)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned short HEADER_Frame::pack </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char **&nbsp;</td>
+          <td class="paramname"> <em>buff</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>PACK/UNPACK Methods</p>
+<p>Method pack_cmd_buffer Mount a new command frame based on values store in the the class, special short and long pointers are needs to populate the buffer. </p>
+
+</div>
+</div>
+<a class="anchor" id="acc61d05f2c52cccf5b87fa87612aee5a"></a><!-- doxytag: member="HEADER_Frame::unpack" ref="acc61d05f2c52cccf5b87fa87612aee5a" args="(unsigned char *buffer)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HEADER_Frame::unpack </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&nbsp;</td>
+          <td class="paramname"> <em>buffer</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Method unpack_cmd_frame Received a frame buffer, parse all fields until FRAMESIZE has been reached Values stored in this class </p>
+
+</div>
+</div>
+<hr/><h2>Atributos</h2>
+<a class="anchor" id="a86426a5d00dda4112ecabb6f94376f9f"></a><!-- doxytag: member="HEADER_Frame::info" ref="a86426a5d00dda4112ecabb6f94376f9f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classHEADER__Frame.html#a86426a5d00dda4112ecabb6f94376f9f">HEADER_Frame::info</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>DATA STORE </p>
+
+</div>
+</div>
+</div>
+<hr class="footer"/><address class="footer"><small>Gerado em Quinta, 20 de Fevereiro de 2014 11:03:23 para OpenC37118 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
+</body>
+</html>

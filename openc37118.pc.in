@@ -1,0 +1,13 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: @PACKAGE_NAME@
+Description: Biblioteca OpenC37118.
+Version: @PACKAGE_VERSION@
+URL: @PACKAGE_URL@
+Libs: -L${libdir} -lopenc37118-@OPENC37118_API_VERSION@
+Cflags: -I${includedir}/openc37118-@OPENC37118_API_VERSION@ -I${libdir}/openc37118-@OPENC37118_API_VERSION@/include
+
+

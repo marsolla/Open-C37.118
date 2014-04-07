@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>OpenC37118: Referência da Classe CMD_Frame</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Gerado por Doxygen 1.7.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&nbsp;Principal</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Arquivos</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Lista&nbsp;de&nbsp;Componentes</span></a></li>
+      <li><a href="classes.html"><span>Índice&nbsp;dos&nbsp;Componentes</span></a></li>
+      <li><a href="hierarchy.html"><span>Hierarquia&nbsp;de&nbsp;Classes</span></a></li>
+      <li><a href="functions.html"><span>Componentes&nbsp;Membros</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Métodos Públicos</a> &#124;
+<a href="#pro-attribs">Atributos Protegidos</a>  </div>
+  <div class="headertitle">
+<h1>Referência da Classe CMD_Frame</h1>  </div>
+</div>
+<div class="contents">
+<!-- doxytag: class="CMD_Frame" --><!-- doxytag: inherits="C37118" -->
+<p><code>#include &lt;<a class="el" href="c37118command_8h_source.html">c37118command.h</a>&gt;</code></p>
+<div class="dynheader">
+Diagrama de Hierarquia para CMD_Frame:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classCMD__Frame.png" usemap="#CMD_Frame_map" alt=""/>
+  <map id="CMD_Frame_map" name="CMD_Frame_map">
+<area href="classC37118.html" alt="C37118" shape="rect" coords="0,0,84,24"/>
+</map>
+</div>
+
+<p><a href="classCMD__Frame-members.html">Lista de todos os Membros.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Métodos Públicos</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCMD__Frame.html#a4352c533e2b1638deb23f70539e483cd">CMD_Frame</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCMD__Frame.html#a8adf42d7b06e24c4dd40ace0a29d0da4">CMD_set</a> (unsigned short value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCMD__Frame.html#ad174248a19d87e97a3e6b3eb90fad536">EXTRAFRAME_set</a> (unsigned char *value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned short&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCMD__Frame.html#afe27a2f70bb4e4b7c5857182ae07842a">CMD_get</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned char *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCMD__Frame.html#a9ed7c1370f91c5573c1adb01876b860f">EXTRAFRAME_get</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned short&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCMD__Frame.html#a51538c9781a61b3b71f0d12dedf0e6da">pack</a> (unsigned char **buffer)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCMD__Frame.html#a65d604d32ef69cd15e864551dcfc98bc">unpack</a> (unsigned char *buffer)</td></tr>
+<tr><td colspan="2"><h2><a name="pro-attribs"></a>
+Atributos Protegidos</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned short&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCMD__Frame.html#aa51b47ebae58dfdfca1ab2ca03212624">CMD</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ee18e4f10d2b6702ecf8cbdeff8c4bd"></a><!-- doxytag: member="CMD_Frame::EXTRAFRAME" ref="a0ee18e4f10d2b6702ecf8cbdeff8c4bd" args="" -->
+unsigned char *&nbsp;</td><td class="memItemRight" valign="bottom"><b>EXTRAFRAME</b></td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Descrição Detalhada</h2>
+<p>C37.118-2011 COMMAND FRAME CLASS Methods, Get/Set for each field to interpret the command Note: EXTRAFRAME is a dynamic size, defined by user application Size(EXTRAFRAME) = Size(FRAMESIZE) - 18 bytes </p>
+<hr/><h2>Construtores &amp; Destrutores</h2>
+<a class="anchor" id="a4352c533e2b1638deb23f70539e483cd"></a><!-- doxytag: member="CMD_Frame::CMD_Frame" ref="a4352c533e2b1638deb23f70539e483cd" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CMD_Frame::CMD_Frame </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>PUBLIC Methods from CLASS COMMAND FRAME, Get/Set for each field Note: EXTRAFRAME is a dynamic size, defined by user application Size(EXTRAFRAME) = Size(FRAMESIZE) - 18 bytes Method Constructor Init the 2 first byte with Command Frame ID Add Header 0xAA|0x41 Set the default FRAMESIZE with 18 bytes. If use EXTRAFRAME field, please update the FRAMESIZE too. </p>
+
+</div>
+</div>
+<hr/><h2>Métodos</h2>
+<a class="anchor" id="afe27a2f70bb4e4b7c5857182ae07842a"></a><!-- doxytag: member="CMD_Frame::CMD_get" ref="afe27a2f70bb4e4b7c5857182ae07842a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned short CMD_Frame::CMD_get </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>GET Methods</p>
+<p>Get CMD Field from Command Frame </p>
+
+</div>
+</div>
+<a class="anchor" id="a8adf42d7b06e24c4dd40ace0a29d0da4"></a><!-- doxytag: member="CMD_Frame::CMD_set" ref="a8adf42d7b06e24c4dd40ace0a29d0da4" args="(unsigned short value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CMD_Frame::CMD_set </td>
+          <td>(</td>
+          <td class="paramtype">unsigned short&nbsp;</td>
+          <td class="paramname"> <em>value</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>SET Methods</p>
+<p>Set CMD Field from Command Frame </p>
+
+</div>
+</div>
+<a class="anchor" id="a9ed7c1370f91c5573c1adb01876b860f"></a><!-- doxytag: member="CMD_Frame::EXTRAFRAME_get" ref="a9ed7c1370f91c5573c1adb01876b860f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char * CMD_Frame::EXTRAFRAME_get </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Get EXTRAFRAME Field from Command Frame </p>
+
+</div>
+</div>
+<a class="anchor" id="ad174248a19d87e97a3e6b3eb90fad536"></a><!-- doxytag: member="CMD_Frame::EXTRAFRAME_set" ref="ad174248a19d87e97a3e6b3eb90fad536" args="(unsigned char *value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CMD_Frame::EXTRAFRAME_set </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&nbsp;</td>
+          <td class="paramname"> <em>value</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Set EXTRAFRAME Field from Command Frame </p>
+
+</div>
+</div>
+<a class="anchor" id="a51538c9781a61b3b71f0d12dedf0e6da"></a><!-- doxytag: member="CMD_Frame::pack" ref="a51538c9781a61b3b71f0d12dedf0e6da" args="(unsigned char **buffer)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned short CMD_Frame::pack </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char **&nbsp;</td>
+          <td class="paramname"> <em>buff</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>PACK/UNPACK Methods</p>
+<p>Method pack_cmd_buffer Mount a new command frame based on values store in the the class, special short and long pointers are needs to populate the buffer. </p>
+
+</div>
+</div>
+<a class="anchor" id="a65d604d32ef69cd15e864551dcfc98bc"></a><!-- doxytag: member="CMD_Frame::unpack" ref="a65d604d32ef69cd15e864551dcfc98bc" args="(unsigned char *buffer)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CMD_Frame::unpack </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&nbsp;</td>
+          <td class="paramname"> <em>buffer</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Method unpack_cmd_frame Received a frame buffer, parse all fields until FRAMESIZE has been reached Values stored in this class </p>
+
+</div>
+</div>
+<hr/><h2>Atributos</h2>
+<a class="anchor" id="aa51b47ebae58dfdfca1ab2ca03212624"></a><!-- doxytag: member="CMD_Frame::CMD" ref="aa51b47ebae58dfdfca1ab2ca03212624" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned short <a class="el" href="classCMD__Frame.html#aa51b47ebae58dfdfca1ab2ca03212624">CMD_Frame::CMD</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>DATA STORE </p>
+
+</div>
+</div>
+</div>
+<hr class="footer"/><address class="footer"><small>Gerado em Quinta, 20 de Fevereiro de 2014 11:03:23 para OpenC37118 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
+</body>
+</html>

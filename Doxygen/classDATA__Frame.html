@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>OpenC37118: Referência da Classe DATA_Frame</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Gerado por Doxygen 1.7.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&nbsp;Principal</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Arquivos</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Lista&nbsp;de&nbsp;Componentes</span></a></li>
+      <li><a href="classes.html"><span>Índice&nbsp;dos&nbsp;Componentes</span></a></li>
+      <li><a href="hierarchy.html"><span>Hierarquia&nbsp;de&nbsp;Classes</span></a></li>
+      <li><a href="functions.html"><span>Componentes&nbsp;Membros</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Métodos Públicos</a> &#124;
+<a href="#pub-attribs">Atributos Públicos</a>  </div>
+  <div class="headertitle">
+<h1>Referência da Classe DATA_Frame</h1>  </div>
+</div>
+<div class="contents">
+<!-- doxytag: class="DATA_Frame" --><!-- doxytag: inherits="C37118" -->
+<p><code>#include &lt;<a class="el" href="c37118data_8h_source.html">c37118data.h</a>&gt;</code></p>
+<div class="dynheader">
+Diagrama de Hierarquia para DATA_Frame:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classDATA__Frame.png" usemap="#DATA_Frame_map" alt=""/>
+  <map id="DATA_Frame_map" name="DATA_Frame_map">
+<area href="classC37118.html" alt="C37118" shape="rect" coords="0,0,89,24"/>
+</map>
+</div>
+
+<p><a href="classDATA__Frame-members.html">Lista de todos os Membros.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Métodos Públicos</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDATA__Frame.html#a4395254336b89db0dcdfea6c555c7b7e">DATA_Frame</a> (<a class="el" href="classCONFIG__Frame.html">CONFIG_Frame</a> *cfg)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned short&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDATA__Frame.html#a8a8e1744695a0ad2046f9612c2f0aff2">pack</a> (unsigned char **buff)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDATA__Frame.html#a6e076377de13c00bb536e057d3100e7b">unpack</a> (unsigned char *buffer)</td></tr>
+<tr><td colspan="2"><h2><a name="pub-attribs"></a>
+Atributos Públicos</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCONFIG__Frame.html">CONFIG_Frame</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDATA__Frame.html#a4d8af2cfade81b63aa8c4b04e9aa47eb">associate_current_config</a></td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Descrição Detalhada</h2>
+<p>C37.118-2011 DATA FRAME CLASS Methods, Get/Set for each field to send and get Phasor Data frame Note: DATA FRAME is a dynamic size, defined by a numbers of PMU </p>
+<hr/><h2>Construtores &amp; Destrutores</h2>
+<a class="anchor" id="a4395254336b89db0dcdfea6c555c7b7e"></a><!-- doxytag: member="DATA_Frame::DATA_Frame" ref="a4395254336b89db0dcdfea6c555c7b7e" args="(CONFIG_Frame *cfg)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DATA_Frame::DATA_Frame </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCONFIG__Frame.html">CONFIG_Frame</a> *&nbsp;</td>
+          <td class="paramname"> <em>cfg</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>PUBLIC Methods from CLASS DATA FRAME, Get/Set for each field Method Constructor Init the 2 first byte with DATA Frame ID Add Header of packet 0xAA|0x01 </p>
+
+</div>
+</div>
+<hr/><h2>Métodos</h2>
+<a class="anchor" id="a8a8e1744695a0ad2046f9612c2f0aff2"></a><!-- doxytag: member="DATA_Frame::pack" ref="a8a8e1744695a0ad2046f9612c2f0aff2" args="(unsigned char **buff)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned short DATA_Frame::pack </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char **&nbsp;</td>
+          <td class="paramname"> <em>buff</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>SET Methods GET Methods PACK/UNPACK Methods </p>
+
+</div>
+</div>
+<a class="anchor" id="a6e076377de13c00bb536e057d3100e7b"></a><!-- doxytag: member="DATA_Frame::unpack" ref="a6e076377de13c00bb536e057d3100e7b" args="(unsigned char *buffer)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DATA_Frame::unpack </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&nbsp;</td>
+          <td class="paramname"> <em>buffer</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Method unpack_data_frame Received a frame buffer, parse all fields until FRAMESIZE has been reached Values stored in this class </p>
+
+</div>
+</div>
+<hr/><h2>Atributos</h2>
+<a class="anchor" id="a4d8af2cfade81b63aa8c4b04e9aa47eb"></a><!-- doxytag: member="DATA_Frame::associate_current_config" ref="a4d8af2cfade81b63aa8c4b04e9aa47eb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCONFIG__Frame.html">CONFIG_Frame</a>* <a class="el" href="classDATA__Frame.html#a4d8af2cfade81b63aa8c4b04e9aa47eb">DATA_Frame::associate_current_config</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>DATA STORE </p>
+
+</div>
+</div>
+</div>
+<hr class="footer"/><address class="footer"><small>Gerado em Quinta, 20 de Fevereiro de 2014 11:03:23 para OpenC37118 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
+</body>
+</html>

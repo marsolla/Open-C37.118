@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>OpenC37118: Código-Fonte de c37118configuration.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Gerado por Doxygen 1.7.1 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&nbsp;Principal</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Arquivos</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&nbsp;de&nbsp;Arquivos</span></a></li>
+    </ul>
+  </div>
+<div class="header">
+  <div class="headertitle">
+<h1>c37118configuration.h</h1>  </div>
+</div>
+<div class="contents">
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef c37118configuration_h</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define c37118configuration_h</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;c37118.h&quot;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;c37118pmustation.h&quot;</span>
+<a name="l00006"></a>00006 
+<a name="l00012"></a><a class="code" href="classCONFIG__Frame.html">00012</a> <span class="keyword">class </span><a class="code" href="classCONFIG__Frame.html">CONFIG_Frame</a> : <span class="keyword">public</span> <a class="code" href="classC37118.html">C37118</a>{
+<a name="l00013"></a>00013         <span class="keyword">public</span>: 
+<a name="l00014"></a>00014         <a class="code" href="classCONFIG__Frame.html#adb080d2369e53a29435aeebff114c0a0">CONFIG_Frame</a>(); 
+<a name="l00015"></a>00015                 
+<a name="l00019"></a>00019         <span class="keywordtype">void</span> <a class="code" href="classCONFIG__Frame.html#adc05da93652632e3d0a06812dc3b67c2">TIME_BASE_set</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> value);
+<a name="l00020"></a>00020         <span class="keywordtype">void</span> <a class="code" href="classCONFIG__Frame.html#aec1c8b17f01a1cc4b4c8a248af739daf">NUM_PMU_set</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> value);
+<a name="l00021"></a>00021         <span class="keywordtype">void</span> <a class="code" href="classCONFIG__Frame.html#a40bfed043fe1c4cb042ad0e91afd0648">DATA_RATE_set</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> value);
+<a name="l00022"></a>00022 
+<a name="l00026"></a>00026         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="classCONFIG__Frame.html#a4e2411d61d7d430162453c9d04d9f43f">TIME_BASE_get</a>();
+<a name="l00027"></a>00027         <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code" href="classCONFIG__Frame.html#affba6215969251474c698dc883dbe3e8">NUM_PMU_get</a>();
+<a name="l00028"></a>00028         <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code" href="classCONFIG__Frame.html#a04526679b77e14d218a10f3f5f351a6f">DATA_RATE_get</a>();
+<a name="l00029"></a>00029         
+<a name="l00033"></a>00033         <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code" href="classCONFIG__Frame.html#a6887894cdd3780ceb4b20689e3a59028">pack</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> **buff);
+<a name="l00034"></a>00034         <span class="keywordtype">void</span> <a class="code" href="classCONFIG__Frame.html#afab5db35461d9caa7303d04850c2deae">unpack</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *buffer);
+<a name="l00035"></a>00035         
+<a name="l00036"></a>00036         <span class="keywordtype">void</span> <a class="code" href="classCONFIG__Frame.html#aacd500aa080e2b6b911137ba7b77f051">PMUSTATION_ADD</a>(<a class="code" href="classPMU__Station.html">PMU_Station</a> *PS);
+<a name="l00037"></a>00037         
+<a name="l00038"></a>00038         <a class="code" href="classPMU__Station.html">PMU_Station</a> *<a class="code" href="classCONFIG__Frame.html#acb6a4d4aec62f3d654658c5c99ef9c3d">PMUSTATION_GETbyIDCODE</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> idcode);
+<a name="l00039"></a>00039         
+<a name="l00040"></a>00040         
+<a name="l00041"></a>00041         <span class="comment">//PMU UNIT LIST</span>
+<a name="l00042"></a>00042         vector&lt;PMU_Station*&gt; pmu_station_list ;
+<a name="l00043"></a>00043         
+<a name="l00047"></a>00047         <span class="keyword">protected</span>:
+<a name="l00048"></a><a class="code" href="classCONFIG__Frame.html#a00821a3616373079faa9189061a4dca5">00048</a>         <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="classCONFIG__Frame.html#a00821a3616373079faa9189061a4dca5">TIME_BASE</a>;
+<a name="l00049"></a>00049         <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> NUM_PMU;
+<a name="l00050"></a>00050         <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> DATA_RATE;
+<a name="l00051"></a>00051 };
+<a name="l00052"></a>00052 
+<a name="l00057"></a><a class="code" href="classCONFIG__1__Frame.html">00057</a> <span class="keyword">class </span><a class="code" href="classCONFIG__1__Frame.html">CONFIG_1_Frame</a> : <span class="keyword">public</span> <a class="code" href="classCONFIG__Frame.html">CONFIG_Frame</a>{
+<a name="l00058"></a>00058         
+<a name="l00059"></a>00059 <span class="keyword">public</span>: 
+<a name="l00060"></a>00060         <a class="code" href="classCONFIG__1__Frame.html#ad91facbfe390a896ff322cdd60b4492e">CONFIG_1_Frame</a>();       
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 };
+<a name="l00063"></a>00063 <span class="preprocessor">#endif</span>
+</pre></div></div>
+</div>
+<hr class="footer"/><address class="footer"><small>Gerado em Quinta, 20 de Fevereiro de 2014 11:03:23 para OpenC37118 por&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
+</body>
+</html>
