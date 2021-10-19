@@ -32,11 +32,11 @@ Through the methods available, it is possible to encapsulate phasors data, analo
 
 The library is divided into six classes:
 
-# 1 main class responsible for encapsulating common to all types of frame data.
+* 1 main class responsible for encapsulating common to all types of frame data.
 
-# 1 class mapping the structure of PMU (PMU Station) , serving as a reference for storing characteristic data of the equipment.
+* 1 class mapping the structure of PMU (PMU Station) , serving as a reference for storing characteristic data of the equipment.
 
-# The other 4 classes describe the 4 types of frames described in the protocol, they are:
+* The other 4 classes describe the 4 types of frames described in the protocol, they are:
 
  ConfigFrame( 1 and 2 / / Setup 3 - To Do )
  HeaderFrame( )
