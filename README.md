@@ -1,7 +1,8 @@
 (C) Copyright 2014 Rafael Marsolla - rafamarsolla at gmail dot com
 
-If you are looking for an LGPL or MIT version please contact us.
+If you are looking for an LGPL or MIT licenses, please contact us.
 
+========================== GPL LICENSE =================================
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
