@@ -1,4 +1,5 @@
 (C) Copyright 2014 Rafael Marsolla - rafamarsolla at gmail dot com
+
 If you are looking for an LGPL or MIT version please contact us.
 
 This program is free software: you can redistribute it and/or modify
