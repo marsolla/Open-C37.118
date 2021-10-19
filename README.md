@@ -2,7 +2,8 @@
 
 If you are looking for an LGPL or MIT licenses, please contact us.
 
-========================== GPL LICENSE =================================
+============================ GPL LICENSE ============================ 
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -31,11 +32,11 @@ Through the methods available, it is possible to encapsulate phasors data, analo
 
 The library is divided into six classes:
 
-1 main class responsible for encapsulating common to all types of frame data.
+# 1 main class responsible for encapsulating common to all types of frame data.
 
-1 class mapping the structure of PMU (PMU Station) , serving as a reference for storing characteristic data of the equipment.
+# 1 class mapping the structure of PMU (PMU Station) , serving as a reference for storing characteristic data of the equipment.
 
-The other 4 classes describe the 4 types of frames described in the protocol, they are:
+# The other 4 classes describe the 4 types of frames described in the protocol, they are:
 
  ConfigFrame( 1 and 2 / / Setup 3 - To Do )
  HeaderFrame( )
@@ -70,4 +71,4 @@ Summary :
 
 TX : Create the object, populate the fields of the object, encapsulate with pack( ) and pass.
 RX : Create the object, receive the package, descanpsule with unpack( ) and read the values of the object's fields.
-In the examples folder it is possible to see the implementation of a PMU and PDC using the methods implemented and tested in a closed loop.
+In the examples folder it is possible to see the implementation of a PMU and PDC using the methods implemented and tested in a real time closed loop.
