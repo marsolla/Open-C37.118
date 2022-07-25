@@ -76,7 +76,7 @@ void CMD_Frame::unpack(unsigned char *buffer){
 		// EXTRAFRAME needs a special treatment, user defined data
 		// unsigned char array to store the data
 		this->EXTRAFRAME = (unsigned char *)malloc (sizeof(char)*(this->FRAMESIZE_get()-18));
-		for (int ptr; ptr < this->FRAMESIZE_get()-18 ; ptr++){
+		for (int ptr=0; ptr < this->FRAMESIZE_get()-18 ; ptr++){
 			this->EXTRAFRAME[ptr] =  buffer[ptr+16] ;
 		}
 		this->CHK_set(ntohs(*((unsigned short *)(buffer+(this->FRAMESIZE_get()-2)))));
