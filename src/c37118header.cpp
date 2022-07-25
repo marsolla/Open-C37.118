@@ -111,7 +111,7 @@ unsigned short HEADER_Frame::pack(unsigned char **buff){
 	char * cstr = new char [str.size()];
 	//Get name string and convert to char string
 	strcpy (cstr, str.c_str());
-	for(int ptr =0 ; ptr< str.size();ptr++){
+	for(size_t ptr =0 ; ptr< str.size();ptr++){
 		aux_buff[ptr]=cstr[ptr];
 	}
 	aux_buff += str.size();

@@ -79,7 +79,7 @@ void CONFIG_Frame::PMUSTATION_ADD(PMU_Station *PS){
 */
 PMU_Station *CONFIG_Frame::PMUSTATION_GETbyIDCODE(unsigned short idcode){
 	int found = 0;
-	for (int i =0; i < this->pmu_station_list.size() ; i++){
+	for (size_t i =0; i < this->pmu_station_list.size() ; i++){
 		if (this->pmu_station_list[i]->IDCODE_get() == idcode){
 			found = i;
 		}
@@ -101,7 +101,6 @@ unsigned short CONFIG_Frame::DATA_RATE_get(){
 * Values stored in this class
 */
 void CONFIG_Frame::unpack(unsigned char *buffer){
-     	unsigned char *buffer2;
      	unsigned char *aux_buffer, *aux_buffer2 ;
 
      	aux_buffer = buffer;

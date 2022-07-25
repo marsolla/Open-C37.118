@@ -331,7 +331,7 @@ unsigned short DATA_Frame::pack(unsigned char **buff){
 * Values stored in this class
 */
 void DATA_Frame::unpack(unsigned char *buffer){
-    	unsigned char *aux_buffer, *aux_buffer2 ;
+    	unsigned char *aux_buffer;
     	myData aux_conv1,aux_conv2;
     	unsigned short aux1, aux2;
     	aux_buffer = buffer;

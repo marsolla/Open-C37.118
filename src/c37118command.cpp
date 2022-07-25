@@ -67,7 +67,6 @@ unsigned char *CMD_Frame::EXTRAFRAME_get(){
 * Values stored in this class
 */
 void CMD_Frame::unpack(unsigned char *buffer){
-     	unsigned char *buffer2;
 		this->SYNC_set(ntohs(*((unsigned short*)(buffer))));
 		this->FRAMESIZE_set(ntohs(*((unsigned short*)(buffer+2))));
 		this->IDCODE_set(ntohs(*((unsigned short*)(buffer+4))));
@@ -76,9 +75,8 @@ void CMD_Frame::unpack(unsigned char *buffer){
 		this->CMD_set(ntohs(*((unsigned short*)(buffer+14))));
 		// EXTRAFRAME needs a special treatment, user defined data
 		// unsigned char array to store the data
-		int ptr = 0;
 		this->EXTRAFRAME = (unsigned char *)malloc (sizeof(char)*(this->FRAMESIZE_get()-18));
-		for (ptr; ptr < this->FRAMESIZE_get()-18 ; ptr++){
+		for (int ptr; ptr < this->FRAMESIZE_get()-18 ; ptr++){
 			this->EXTRAFRAME[ptr] =  buffer[ptr+16] ;
 		}
 		this->CHK_set(ntohs(*((unsigned short *)(buffer+(this->FRAMESIZE_get()-2)))));
@@ -113,8 +111,8 @@ unsigned short CMD_Frame::pack(unsigned char **buff){
 	*shptr = htons(this->CMD_get());aux_buff +=2;
 	// EXTRAFRAME needs a special treatment, user defined data
 	// unsigned char array to store the data
-	int ptr = 0;
-	for(ptr ; ptr< this->FRAMESIZE_get()-18;ptr++){
+
+	for(int ptr = 0; ptr< this->FRAMESIZE_get()-18;ptr++){
 		aux_buff[ptr]=this->EXTRAFRAME[ptr];
 	}
 	aux_buff = *buff + (this->FRAMESIZE_get()-2);

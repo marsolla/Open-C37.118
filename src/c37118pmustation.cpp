@@ -163,7 +163,7 @@ void PMU_Station::ANALOG_add(string name, unsigned int type){
 *  NORMAL = MSB Bytes and VALID is LSB Bytes
 */
 void PMU_Station::DIGITAL_add(vector<string> name, unsigned short normal, unsigned short valid){
-	for(int i=0; i< name.size() ; i++){ 
+	for(size_t i=0; i< name.size() ; i++){ 
 		name[i].append(16,' ');
 		this->CHNAM_Digital.push_back(name[i].substr(0,16));
 	}
