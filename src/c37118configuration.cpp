@@ -258,7 +258,7 @@ unsigned short CONFIG_Frame::pack(unsigned char **buff){
 		char * cstr = new char [16];
 		
 		//Get name string and convert to char string
-		strcpy (cstr, this->pmu_station_list[i]->STN_get().c_str());
+		strncpy (cstr, this->pmu_station_list[i]->STN_get().c_str(), 16);
 		for(int ptr =0 ; ptr< 16;ptr++){
 			aux_buff[ptr]=cstr[ptr];
 		}
@@ -278,7 +278,7 @@ unsigned short CONFIG_Frame::pack(unsigned char **buff){
 		// Channels Name
 		//Phasor
 		for(int j =0 ;j< this->pmu_station_list[i]->PHNMR_get() ; j++){
-			strcpy (cstr, this->pmu_station_list[i]->PH_NAME_get(j).c_str());
+			strncpy (cstr, this->pmu_station_list[i]->PH_NAME_get(j).c_str(), 16);
 			for(int ptr =0 ; ptr< 16;ptr++){
 				aux_buff[ptr]=cstr[ptr];
 			}
@@ -286,7 +286,7 @@ unsigned short CONFIG_Frame::pack(unsigned char **buff){
 		}
 		//Analog
 		for(int j=0 ; j < this->pmu_station_list[i]->ANNMR_get() ; j++){
-			strcpy (cstr, this->pmu_station_list[i]->AN_NAME_get(j).c_str());
+			strncpy (cstr, this->pmu_station_list[i]->AN_NAME_get(j).c_str(), 16);
 			for(int ptr =0 ; ptr< 16;ptr++){
 				aux_buff[ptr]=cstr[ptr];
 			}
@@ -294,7 +294,7 @@ unsigned short CONFIG_Frame::pack(unsigned char **buff){
 		}
 		//Digital
 		for(int j =0 ; j < 16*this->pmu_station_list[i]->DGNMR_get() ; j++){
-			strcpy (cstr, this->pmu_station_list[i]->DG_NAME_get(j).c_str());
+			strncpy (cstr, this->pmu_station_list[i]->DG_NAME_get(j).c_str(), 16);
 			for(int ptr =0 ; ptr< 16;ptr++){
 				aux_buff[ptr]=cstr[ptr];
 			}

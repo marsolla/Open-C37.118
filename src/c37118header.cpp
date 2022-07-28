@@ -110,7 +110,7 @@ unsigned short HEADER_Frame::pack(unsigned char **buff){
 	*lptr = htonl(this->FRACSEC_get()); aux_buff +=4;
 	char * cstr = new char [str.size()];
 	//Get name string and convert to char string
-	strcpy (cstr, str.c_str());
+	strncpy (cstr, str.c_str(), str.size());
 	for(size_t ptr =0 ; ptr< str.size();ptr++){
 		aux_buff[ptr]=cstr[ptr];
 	}
