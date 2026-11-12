@@ -330,26 +330,33 @@ unsigned short DATA_Frame::pack(unsigned char **buff){
 * Received a frame buffer, parse all fields until FRAMESIZE has been reached
 * Values stored in this class
 */
-void DATA_Frame::unpack(unsigned char *buffer){
-    	unsigned char *aux_buffer, *aux_buffer2 ;
-    	myData aux_conv1,aux_conv2;
-    	unsigned short aux1, aux2;
-    	aux_buffer = buffer;
-	this->SYNC_set(ntohs(*((unsigned short*)(aux_buffer))));
+void DATA_Frame::unpack(unsigned char *buffer, unsigned int buffer_len){
+     	unsigned char *aux_buffer, *aux_buffer2 ;
+     	myData aux_conv1,aux_conv2;
+     	unsigned short aux1, aux2;
+     	const unsigned char *bend = buffer + buffer_len;
+     	// The data-frame layout is defined by the associated configuration's per-station counts
+     	// (NUM_PMU/PHNMR/ANNMR/DGNMR), which arrive from a separate, attacker-influenced CFG frame.
+     	// Bound every read against the bytes actually received so an inflated config plus a short data
+     	// frame cannot walk past the buffer.
+     	#define C37_NEED(p, n) do { if ((p) > bend || (size_t)(bend - (p)) < (size_t)(n)) return; } while(0)
+     	aux_buffer = buffer;
+	C37_NEED(aux_buffer, 2); this->SYNC_set(ntohs(*((unsigned short*)(aux_buffer))));
 	aux_buffer +=2;
-	this->FRAMESIZE_set(ntohs(*((unsigned short*)(aux_buffer))));
+	C37_NEED(aux_buffer, 2); this->FRAMESIZE_set(ntohs(*((unsigned short*)(aux_buffer))));
 	aux_buffer +=2;
-	this->IDCODE_set(ntohs(*((unsigned short*)(aux_buffer))));
+	C37_NEED(aux_buffer, 2); this->IDCODE_set(ntohs(*((unsigned short*)(aux_buffer))));
 	aux_buffer +=2;
-	this->SOC_set(ntohl(*((unsigned long*)(aux_buffer))));
+	C37_NEED(aux_buffer, 4); this->SOC_set(ntohl(*((unsigned int*)(aux_buffer))));
 	aux_buffer +=4;
-	this->FRACSEC_set(ntohl(*((unsigned long*)(aux_buffer))));
+	C37_NEED(aux_buffer, 4); this->FRACSEC_set(ntohl(*((unsigned int*)(aux_buffer))));
 	aux_buffer +=4;
-    	
+     	
 	// For each pmu station
 	for(int i = 0; i< this->associate_current_config->NUM_PMU_get() ; i++){
 	
 	//Get Status Value
+	C37_NEED(aux_buffer, 2);
 	this->associate_current_config->pmu_station_list[i]->STAT_set(ntohs(*((unsigned short*)(aux_buffer))));
 	aux_buffer +=2;	
 		//Foreach Phasors
@@ -357,6 +364,7 @@ void DATA_Frame::unpack(unsigned char *buffer){
 			// Data mode = float
 			if(this->associate_current_config->pmu_station_list[i]->FORMAT_PHASOR_TYPE_get()){
 				//Float Converter Struct
+				C37_NEED(aux_buffer, 8);
 				aux_conv1.s[3] = (*((unsigned char *)(aux_buffer)));
 				aux_buffer++;
 				aux_conv1.s[2] = (*((unsigned char *)(aux_buffer)));
@@ -376,10 +384,6 @@ void DATA_Frame::unpack(unsigned char *buffer){
 				aux_buffer++;
 				// Coord Polar
 				if (this->associate_current_config->pmu_station_list[i]->FORMAT_COORD_get()){
-					//cout << "AUX1: " << aux1 << endl;
-				//cout << "AUX2: " << aux2 << endl;
-				//cout << "Polar ANG: " << aux_conv2.f << endl;
-				
 					this->associate_current_config->pmu_station_list[i]->PHASOR_VALUE_set(polar((float)aux_conv1.f,(float)aux_conv2.f),j);
 				}
 				// Coord Recta
@@ -389,6 +393,7 @@ void DATA_Frame::unpack(unsigned char *buffer){
 			}
 			// Data mode = Integer 16 bits
 			else{
+				C37_NEED(aux_buffer, 4);
 				aux1 = ntohs(*((unsigned short*)(aux_buffer)));
 				aux_buffer +=2;
 				aux2 = ntohs(*((unsigned short*)(aux_buffer)));
@@ -415,6 +420,7 @@ void DATA_Frame::unpack(unsigned char *buffer){
 		// Data mode = float
 		if(this->associate_current_config->pmu_station_list[i]->FORMAT_FREQ_TYPE_get()){
 			//Float Converter Struct
+			C37_NEED(aux_buffer, 8);
 			aux_conv1.s[3] = (*((unsigned char *)(aux_buffer)));
 			aux_buffer++;
 			aux_conv1.s[2] = (*((unsigned char *)(aux_buffer)));
@@ -439,6 +445,7 @@ void DATA_Frame::unpack(unsigned char *buffer){
 		// Data mode = Integer 16 bits
 		else{
 			
+			C37_NEED(aux_buffer, 4);
 			aux1 = ntohs(*((unsigned short*)(aux_buffer)));
 			aux_buffer +=2;
 			aux2 = ntohs(*((unsigned short*)(aux_buffer)));
@@ -457,6 +464,7 @@ void DATA_Frame::unpack(unsigned char *buffer){
 		for(int j = 0; j< this->associate_current_config->pmu_station_list[i]->ANNMR_get(); j++){
 			// Data mode = float
 			if(this->associate_current_config->pmu_station_list[i]->FORMAT_ANALOG_TYPE_get()){
+				C37_NEED(aux_buffer, 4);
 				aux_conv1.s[3] = (*((unsigned char *)(aux_buffer)));
 				aux_buffer++;
 				aux_conv1.s[2] = (*((unsigned char *)(aux_buffer)));
@@ -472,6 +480,7 @@ void DATA_Frame::unpack(unsigned char *buffer){
 			}
 			// Data mode = Integer 16 bits
 			else{
+				C37_NEED(aux_buffer, 2);
 				aux1 = ntohs(*((unsigned short*)(aux_buffer)));
 				aux_buffer +=2;
 				this->associate_current_config->pmu_station_list[i]->ANALOG_VALUE_set(aux1,j);
@@ -480,9 +489,9 @@ void DATA_Frame::unpack(unsigned char *buffer){
 		
 		//Foreach DIGITAL
 		for(int j = 0; j< this->associate_current_config->pmu_station_list[i]->DGNMR_get(); j++){
+			C37_NEED(aux_buffer, 2);
 			aux1 = ntohs(*((unsigned short*)(aux_buffer)));
 			aux_buffer +=2;
-			//cout<<"AUX: "<<aux1<<endl;
 			for(int k = 0; k < 16 ; k++){	
 				if(((aux1>>k)&0x0001) == true){
 					this->associate_current_config->pmu_station_list[i]->DIGITAL_VALUE_set(true,j,k);
@@ -497,7 +506,8 @@ void DATA_Frame::unpack(unsigned char *buffer){
 	}// foreach PMU STATION
 	
 	// CRC (PREVIOUS COMPUTED in PACK/UNPACK Methods)		
-	this->CHK_set(ntohs(*(unsigned short *)(aux_buffer)));
+	C37_NEED(aux_buffer, 2); this->CHK_set(ntohs(*(unsigned short *)(aux_buffer)));
+	#undef C37_NEED
 }
 
 

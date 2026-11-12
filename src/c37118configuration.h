@@ -26,9 +26,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 * Note: CONFIG FRAME is a dynamic size, defined by a numbers of PMU
 */
 class CONFIG_Frame : public C37118{
-	public: 
-	CONFIG_Frame();	
-		
+	public:
+	CONFIG_Frame();
+
 	/**
 	* SET Methods
 	*/
@@ -47,7 +47,7 @@ class CONFIG_Frame : public C37118{
 	* PACK/UNPACK Methods
 	*/
 	unsigned short pack(unsigned char **buff);
-	void unpack(unsigned char *buffer);
+	void unpack(unsigned char *buffer, unsigned int buffer_len);
 	
 	void PMUSTATION_ADD(PMU_Station *PS);
 	

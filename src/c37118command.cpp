@@ -66,14 +66,19 @@ unsigned char *CMD_Frame::EXTRAFRAME_get(){
 * Received a frame buffer, parse all fields until FRAMESIZE has been reached
 * Values stored in this class
 */
-void CMD_Frame::unpack(unsigned char *buffer){
+void CMD_Frame::unpack(unsigned char *buffer, unsigned int buffer_len){
      	unsigned char *buffer2;
+	// Reject frames that do not carry the 16-byte command header, and reject a FRAMESIZE that exceeds
+	// the bytes actually received before it sizes the EXTRAFRAME copy and locates the trailing CHK.
+	if (buffer_len < 16) return;
 		this->SYNC_set(ntohs(*((unsigned short*)(buffer))));
 		this->FRAMESIZE_set(ntohs(*((unsigned short*)(buffer+2))));
 		this->IDCODE_set(ntohs(*((unsigned short*)(buffer+4))));
-		this->SOC_set(ntohl(*((unsigned long*)(buffer+6))));
-		this->FRACSEC_set(ntohl(*((unsigned long*)(buffer+10))));
+		this->SOC_set(ntohl(*((unsigned int*)(buffer+6))));
+		this->FRACSEC_set(ntohl(*((unsigned int*)(buffer+10))));
 		this->CMD_set(ntohs(*((unsigned short*)(buffer+14))));
+		unsigned int framesize = this->FRAMESIZE_get();
+		if (framesize < 18 || framesize > buffer_len) return;
 		// EXTRAFRAME needs a special treatment, user defined data
 		// unsigned char array to store the data
 		int ptr = 0;
@@ -82,7 +87,6 @@ void CMD_Frame::unpack(unsigned char *buffer){
 			this->EXTRAFRAME[ptr] =  buffer[ptr+16] ;
 		}
 		this->CHK_set(ntohs(*((unsigned short *)(buffer+(this->FRAMESIZE_get()-2)))));
-		//printf("Packet Received: %x,%x,%x,%x,%x,%x,%x\n",this->FRAMESIZE_get(),this->IDCODE_get(),this->SOC_get(),this->FRACSEC_get(),this->CMD_get(),this->EXTRAFRAME_get(),this->CHK_get());
 }
 
 /**

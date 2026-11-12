@@ -56,25 +56,31 @@ string HEADER_Frame::DATA_get(){
 * Received a frame buffer, parse all fields until FRAMESIZE has been reached
 * Values stored in this class
 */
-void HEADER_Frame::unpack(unsigned char *buffer){
+void HEADER_Frame::unpack(unsigned char *buffer, unsigned int buffer_len){
      	unsigned char *buffer2;
      	unsigned short size_data;
+	// Reject frames that do not carry the 14-byte header, and reject a FRAMESIZE that exceeds the bytes
+	// actually received before it sizes the DATA copy and locates the trailing CHK.
+	if (buffer_len < 16) return;
 		this->SYNC_set(ntohs(*((unsigned short*)(buffer))));
 		this->FRAMESIZE_set(ntohs(*((unsigned short*)(buffer+2))));
 		this->IDCODE_set(ntohs(*((unsigned short*)(buffer+4))));
-		this->SOC_set(ntohl(*((unsigned long*)(buffer+6))));
-		this->FRACSEC_set(ntohl(*((unsigned long*)(buffer+10))));
+		this->SOC_set(ntohl(*((unsigned int*)(buffer+6))));
+		this->FRACSEC_set(ntohl(*((unsigned int*)(buffer+10))));
+		unsigned int framesize = this->FRAMESIZE_get();
+		if (framesize < 16 || framesize > buffer_len) return;
 		buffer2 = buffer + 14; 
 		
 		size_data = this->FRAMESIZE_get()-16;
-		char * cstr = new char [size_data];
+		char * cstr = new char [size_data + 1];
 		for(int ptr =0 ; ptr< size_data;ptr++){
 			cstr[ptr] = buffer2[ptr];
 		}
-		this->DATA_set(string(cstr));
+		cstr[size_data] = '\0';           // NUL-terminate; the buffer was previously unterminated
+		this->DATA_set(string(cstr, size_data));
+		delete [] cstr;                   // was leaked on every call
 		
 		this->CHK_set(ntohs(*((unsigned short *)(buffer+(this->FRAMESIZE_get()-2)))));
-		//printf("Packet Received: %x,%x,%x,%x,%x,%x,%x\n",this->FRAMESIZE_get(),this->IDCODE_get(),this->SOC_get(),this->FRACSEC_get(),this->CMD_get(),this->EXTRAFRAME_get(),this->CHK_get());
 }
 
 /**

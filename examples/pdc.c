@@ -153,7 +153,7 @@ int main( int argc, char *argv[] ){
    
     //REceive Config 2 
     size = read(sockfd, buffer_rx, SIZE_BUFFER);
-    my_config2->unpack(buffer_rx);
+    my_config2->unpack(buffer_rx, size > 0 ? (unsigned int)size : 0);
     
    // Create data with config frame received 
    DATA_Frame *my_data = new DATA_Frame(my_config2);
@@ -170,7 +170,7 @@ int main( int argc, char *argv[] ){
     
     //REceive Header 2 
     size = read(sockfd, buffer_rx, SIZE_BUFFER);
-    my_header->unpack(buffer_rx);
+    my_header->unpack(buffer_rx, size > 0 ? (unsigned int)size : 0);
     cout << "INFO: " << my_header->DATA_get() << endl;
     
     
@@ -192,7 +192,7 @@ int main( int argc, char *argv[] ){
     for(i = 0 ; i < 200 ; i++){
     	    size = read(sockfd, buffer_rx, SIZE_BUFFER);
     	  if (size > 0) {
-    	    my_data->unpack(buffer_rx);
+    	    my_data->unpack(buffer_rx, (unsigned int)size);
     	   // for (k =0 ; k < my_data->associate_current_config->pmu_station_list[0]->PHNMR_get(); k++){
     	   // 	    cout <<my_data->associate_current_config->pmu_station_list[0]->PH_NAME_get(k) << ":" << abs(my_data->associate_current_config->pmu_station_list[0]->PHASOR_VALUE_get(k)) <<"|_ " << arg(my_data->associate_current_config->pmu_station_list[0]->PHASOR_VALUE_get(k))*180/M_PI << endl;
     	   // }
