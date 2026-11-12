@@ -1,6 +1,16 @@
 (C) Copyright 2014 Rafael Marsolla - rafamarsolla at gmail dot com
 
-If you are looking for an LGPL or MIT licenses, please contact us.
+Project Status — Discontinued / Unmaintained
+
+Open-C37.118 is a legacy C++ library developed for research and experimental implementation of the IEEE C37.118 synchrophasor protocol.
+
+The project is no longer actively maintained, and no further updates, bug fixes, or security patches are planned.
+
+The original laboratory and hardware testing environment is no longer available. As a result, changes cannot be adequately validated.
+
+Security notice: The library's frame parsing routines may not adequately validate malformed or untrusted input, potentially leading to out-of-bounds memory reads and application crashes.
+
+The code is provided as-is for historical, educational, and research purposes. It should not be used in production or critical infrastructure systems without an independent security review and appropriate validation safeguards.
 
 ============================ GPL LICENSE ============================ 
 
