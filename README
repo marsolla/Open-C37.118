@@ -1,4 +1,22 @@
-(C) Copyright 2014 Rafael Marsolla - rafamarsolla@gmail.com
+(C) Copyright 2014 Rafael Marsolla - rafamarsolla at gmail dot com
+
+Project Status — Discontinued / Unmaintained
+
+If you are looking for an LGPL or MIT licenses, please contact us.
+
+============================ FYI ============================ 
+
+Open-C37.118 is a legacy C++ library developed for research and experimental implementation of the IEEE C37.118 synchrophasor protocol.
+
+The project is no longer actively maintained, and no further updates, bug fixes, or security patches are planned.
+
+The original laboratory and hardware testing environment is no longer available. As a result, changes cannot be adequately validated.
+
+Security notice: The library's frame parsing routines may not adequately validate malformed or untrusted input, potentially leading to out-of-bounds memory reads and application crashes.
+
+The code is provided as-is for historical, educational, and research purposes. It should not be used in production or critical infrastructure systems without an independent security review and appropriate validation safeguards.
+
+============================ GPL LICENSE ============================ 
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -13,46 +31,58 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-A biblioteca OpenC37.118-2011 foi desenvolvida pelo LSEE como forma de disponibilizar um meio de comunicação implementando o protocolo Syncrophasor normatizo segundo norma IEEE C37.118-2011.
+Open C37.118
+==========
 
-Totalmente desenvolvida em linguagem C++, permite de forma simples a comunicação via rede TCP/IP utilizando os frames descritos segundo o padrão normativo.
-Qualquer aplicação desenvolvida e compatível com esta linguagem pode fazer uso dos recursos implementados.
+IEEE C37.118-2011 Synchrophasor Protocol Implementation
 
-Através dos métodos disponíveis, é possível encapsular dados fasorais, medições analógicas e digitais, ou ainda, informações relacionadaa à funcionalidade do equipamento.
+The OpenC37.118-2011 library was developed as a way of providing a means of communication Synchrophasor implementing the Protocol as per IEEE C37.118-2011.
 
-A biblioteca está divida em 6 classes:
-- 1 classe principal responsável por encapsular os dados comuns a todos os tipos de frame. 
-- 1 classe que mapeia uma estrutura de PMU, servindo como referência para armazenamento dos dados característicos do equipamento.
-	
-As 4 outras classes descrevem os 4 tipos de frames descritos no protocolo, são eles:
- - Frame Config (1 e 2, //3- ToDo)
- - Frame Header()
- - Frame Data()
- - Frame Command();
+Fully developed in C++, allows you to simply communicating via TCP/IP using the frames described the normative standard.
 
- Toda operação do equipamento é feita utilizando o Frame Command(), que contém o comando a ser executado pelo equipamento. (Ex. Send Data ON / Send Data OFF).
- 
- Toda comunicação entre equipamentos inicia-se com um comando de pedido de configuração o qual informa atraves do Frame Config() o modo de configuração corrente/disponível no equipamento.
- 	 Config 2 = corrente
- 	 Config 1 = Disponível
- 	 
- Recebido ou enviado a configuração, esta informará como o equipamento e quais os tipos de dados que serão transmitidos.
- 
- Posteriormente, a unidade aguarda receber um comando de inicio de transmissao de dados, Frame Data()o qual é ligado e desligado também conforme Frame Command enviado.
+Any application developed and supported by this language may make use of the features implemented.
 
- Já O Frame Header() descreve informações específicas sobre equipamento, geralmente customizado pelo fabricante/usuário (Ex. Serial Number, SW Version).
+Through the methods available, it is possible to encapsulate phasors data, analog and digital measurements, or even information related to product functionality.
 
-Para cada um dos frames enviados, faz-se necessário preencher os dados diretamente nas estruras antes de qualquer transmissão. 
-O método pack() é responsavel por encapsular um buffer de parametros em um frame específico conforme definido em norma.
-Ao receber um pacote C37.118, deve-se usar o método unpack() conforme o tipo de frame recebido.
-As informações contidas neste pacote, então são copiadas para um buffer, utilizado pela aplicação.
+The library is divided into six classes:
 
-Resumo: 
-TX:
-Crie o objeto, popule os campos do objeto, encapsule com pack() e transmita.
+* 1 main class responsible for encapsulating common to all types of frame data.
 
-RX:
-Crie o objeto, receba o pacote, descanpsule ele com unpack() e leia os valores dos campos do objeto.
+* 1 class mapping the structure of PMU (PMU Station) , serving as a reference for storing characteristic data of the equipment.
 
-Na pasta examples é possivel ver a implementação de um PMU e um PDC utilizando os métodos implementados e testados em loop real.
+* The other 4 classes describe the 4 types of frames described in the protocol, they are:
 
+ ConfigFrame( 1 and 2 / / Setup 3 - To Do )
+ HeaderFrame( )
+ DataFrame( )
+ CommandFrame( ) ;
+
+The entire operation of the equipment is made using the CommandFrame( ), which contains the command to be executed by the machine. (Ex. Send Data ON / Send Data OFF).
+
+All communication between devices starts with a configuration request command which reports through the FrameConfig( ) the current mode setting / available equipment.
+
+Config 1 = Available
+Config 2 = Current
+Config 3 = To Do - Not available yet.
+
+Incoming or outgoing setup, this will tell you how the equipment is set up and what types of data to be transmitted.
+
+Subsequently, the unit waits to receive a command from the beginning of data transmission as CommandFrame( ) sent.
+
+DataFrame( ), is responsible for encapsulating the measurements and transmit them.
+
+The HeaderFrame( ) describes specific information about equipment, usually customized by the manufacturer/user (eg: Serial Number, SW Version).
+
+For each of the frames sent, it is necessary to fill out the data directly in the structures (BUFFER) before any transmission.
+
+The pack( ) method is responsible for encapsulating a buffer of parameters in a specific frame as defined in the standard.
+
+When receiving a packet C37.118, you should use the unpack( ) method on the type of frame received.
+
+The information contained in this package are then copied to a buffer used by the application.
+
+Summary :
+
+TX : Create the object, populate the fields of the object, encapsulate with pack( ) and pass.
+RX : Create the object, receive the package, descanpsule with unpack( ) and read the values of the object's fields.
+In the examples folder it is possible to see the implementation of a PMU and PDC using the methods implemented and tested in a real time closed loop.
