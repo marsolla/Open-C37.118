@@ -100,110 +100,87 @@ unsigned short CONFIG_Frame::DATA_RATE_get(){
 * Received a frame buffer, parse all fields until FRAMESIZE has been reached
 * Values stored in this class
 */
-void CONFIG_Frame::unpack(unsigned char *buffer){
-     	unsigned char *buffer2;
-     	unsigned char *aux_buffer, *aux_buffer2 ;
+void CONFIG_Frame::unpack(unsigned char *buffer, unsigned int buffer_len){
+	unsigned char *aux_buffer, *aux_buffer2 ;
+	const unsigned char *bend = buffer + buffer_len;
+	PMU_Station *PS = NULL;
+	// Bound every read against the number of bytes actually received. unpack() historically trusted
+	// the frame's own FRAMESIZE and per-station counts and walked off the end of short frames; this
+	// rejects a frame whose declared contents do not fit in buffer_len.
+	#define C37_NEED(p, n) do { if ((p) > bend || (size_t)(bend - (p)) < (size_t)(n)) goto fail; } while(0)
 
-     	aux_buffer = buffer;
-		this->SYNC_set(ntohs(*((unsigned short*)(aux_buffer))));
-		aux_buffer +=2;
-		this->FRAMESIZE_set(ntohs(*((unsigned short*)(aux_buffer))));
-		aux_buffer +=2;
-		this->IDCODE_set(ntohs(*((unsigned short*)(aux_buffer))));
-		aux_buffer +=2;
-		this->SOC_set(ntohl(*((unsigned long*)(aux_buffer))));
-		aux_buffer +=4;
-		this->FRACSEC_set(ntohl(*((unsigned long*)(aux_buffer))));
-		aux_buffer +=4;
-		this->TIME_BASE_set(ntohl(*((unsigned long*)(aux_buffer))));
-		aux_buffer +=4;
-		unsigned short pmu_count = (ntohs(*((unsigned short*)(aux_buffer))));
-		aux_buffer +=2;
-		// FOR EACH PMU STATION
-		for(int pos = 0; pos < pmu_count ; pos++){
-			PMU_Station *PS = new PMU_Station();
-			PS->STN_set(string((const char*)aux_buffer,16));
-			aux_buffer += 16;
-			PS->IDCODE_set(ntohs(*(unsigned short*)(aux_buffer)));
-			aux_buffer +=2;
-			
-			//FORMAT
-			PS->FORMAT_set(ntohs(*(unsigned short*)(aux_buffer)));
-			aux_buffer +=2;
-			unsigned short phasor_n = ntohs(*(unsigned short*)(aux_buffer));
-			aux_buffer +=2;
-			unsigned short analog_n = ntohs(*(unsigned short*)(aux_buffer));
-			aux_buffer +=2;
-			unsigned short digital_n = ntohs(*(unsigned short*)(aux_buffer));
-			aux_buffer +=2;
-			
-			// POITER TO JUMP CHANNELS SUB FRAME
-			aux_buffer2 = aux_buffer + 16*(phasor_n+analog_n+ (16*digital_n));
-			
-			// CHANNELS
-			// PHASOR
-			for(int chan =0; chan < phasor_n ; chan++ ){
+	aux_buffer = buffer;
+	aux_buffer2 = buffer;
+	C37_NEED(aux_buffer, 2); this->SYNC_set(ntohs(*((unsigned short*)(aux_buffer))));      aux_buffer += 2;
+	C37_NEED(aux_buffer, 2); this->FRAMESIZE_set(ntohs(*((unsigned short*)(aux_buffer)))); aux_buffer += 2;
+	C37_NEED(aux_buffer, 2); this->IDCODE_set(ntohs(*((unsigned short*)(aux_buffer))));    aux_buffer += 2;
+	C37_NEED(aux_buffer, 4); this->SOC_set(ntohl(*((unsigned int*)(aux_buffer))));         aux_buffer += 4;
+	C37_NEED(aux_buffer, 4); this->FRACSEC_set(ntohl(*((unsigned int*)(aux_buffer))));     aux_buffer += 4;
+	C37_NEED(aux_buffer, 4); this->TIME_BASE_set(ntohl(*((unsigned int*)(aux_buffer))));   aux_buffer += 4;
+	C37_NEED(aux_buffer, 2);
+	// Scope the body locals (pmu_count, per-station counts) so none are in scope at the fail label;
+	// this keeps the goto-based bounds checks well-formed under -Werror.
+	{
+	unsigned short pmu_count = (ntohs(*((unsigned short*)(aux_buffer))));                  aux_buffer += 2;
+	// FOR EACH PMU STATION
+	for(int pos = 0; pos < pmu_count ; pos++){
+		PS = new PMU_Station();
+		C37_NEED(aux_buffer, 16); PS->STN_set(string((const char*)aux_buffer,16));         aux_buffer += 16;
+		C37_NEED(aux_buffer, 2);  PS->IDCODE_set(ntohs(*(unsigned short*)(aux_buffer)));   aux_buffer += 2;
+		C37_NEED(aux_buffer, 2);  PS->FORMAT_set(ntohs(*(unsigned short*)(aux_buffer)));   aux_buffer += 2;
+		C37_NEED(aux_buffer, 2);  unsigned short phasor_n  = ntohs(*(unsigned short*)(aux_buffer)); aux_buffer += 2;
+		C37_NEED(aux_buffer, 2);  unsigned short analog_n  = ntohs(*(unsigned short*)(aux_buffer)); aux_buffer += 2;
+		C37_NEED(aux_buffer, 2);  unsigned short digital_n = ntohs(*(unsigned short*)(aux_buffer)); aux_buffer += 2;
 
-				unsigned long factor_aux = ntohl(*(unsigned long*)(aux_buffer2));
-				factor_aux &= 0x0FFFFFF;
-								
-				unsigned long type_aux = ntohl(*(unsigned long*)(aux_buffer2));
-				type_aux &= 0xF000000;
-				type_aux = (type_aux >> 24);
-				
-				PS->PHASOR_add(string((const char*)aux_buffer,16),factor_aux,type_aux);
-				aux_buffer +=16;	
-				aux_buffer2 +=4;
-			}
-			
-			// ANALOG
-			for(int chan =0; chan < analog_n ; chan++ ){
-				unsigned long factor_aux = ntohl(*(unsigned long*)(aux_buffer2));
-				factor_aux &= 0x0FFFFFF;
-								
-				unsigned long type_aux = ntohl(*(unsigned long*)(aux_buffer2));
-				type_aux &= 0xF000000;
-				type_aux = (type_aux >> 24);
-				
-				PS->ANALOG_add(string((const char*)aux_buffer,16),factor_aux,type_aux);
-				aux_buffer +=16;	
-				aux_buffer2 +=4;	
-			}
-			// DIGITAL
-			for(int chan =0; chan < digital_n ; chan++ ){
-				vector<string> aux ;
-				for(int bit=0; bit < 16 ; bit++){
-					aux.push_back(string((const char*)aux_buffer,16));
-					aux_buffer +=16;	
-				}
-				unsigned short msb_normal = ntohs(*(unsigned short*)(aux_buffer2)); 
-				aux_buffer2 +=2;
-				unsigned short lsb_valid = ntohs(*(unsigned short*)(aux_buffer2));
-				aux_buffer2 +=2;
-				PS->DIGITAL_add(aux,msb_normal,lsb_valid);	
-			}			
-			
-			// FNOM
-			PS->FNOM_set(ntohs(*(unsigned short*)(aux_buffer2)));
-			aux_buffer2 +=2;
-			
-			// CFGCNT
-			PS->CFGCNT_set(ntohs(*(unsigned short*)(aux_buffer2)));
-			aux_buffer2 +=2;
+		// Channel sub-frame: names (16 B each) are at aux_buffer, conversion factors are at
+		// aux_buffer2, which starts after the whole name block. Verify the block fits before use.
+		size_t chanblock = (size_t)16 * ((size_t)phasor_n + (size_t)analog_n + (size_t)16 * (size_t)digital_n);
+		if ((aux_buffer > bend) || ((size_t)(bend - aux_buffer) < chanblock)) goto fail;
+		aux_buffer2 = aux_buffer + chanblock;
 
-		//UPDATE BUFFER POINTER
-		aux_buffer = aux_buffer2;
-		
-		// ADD PMU UNIT TO LIST
-		this->PMUSTATION_ADD(PS);
+		// PHASOR
+		for(int chan = 0; chan < phasor_n ; chan++){
+			C37_NEED(aux_buffer2, 4);
+			unsigned long factor_aux = ntohl(*(unsigned int*)(aux_buffer2)); factor_aux &= 0x0FFFFFF;
+			unsigned long type_aux   = ntohl(*(unsigned int*)(aux_buffer2)); type_aux &= 0xF000000; type_aux = (type_aux >> 24);
+			C37_NEED(aux_buffer, 16); PS->PHASOR_add(string((const char*)aux_buffer,16),factor_aux,type_aux);
+			aux_buffer += 16; aux_buffer2 += 4;
 		}
-		
-		// DATA_RATE
-		this->DATA_RATE_set(ntohs(*((unsigned short*)(aux_buffer2))));
-		aux_buffer2 +=2;
-		
-		// CRC (PREVIOUS COMPUTED in PACK/UNPACK Methods)		
-		this->CHK_set(ntohs(*(unsigned short *)(aux_buffer2)));
+		// ANALOG
+		for(int chan = 0; chan < analog_n ; chan++){
+			C37_NEED(aux_buffer2, 4);
+			unsigned long factor_aux = ntohl(*(unsigned int*)(aux_buffer2)); factor_aux &= 0x0FFFFFF;
+			unsigned long type_aux   = ntohl(*(unsigned int*)(aux_buffer2)); type_aux &= 0xF000000; type_aux = (type_aux >> 24);
+			C37_NEED(aux_buffer, 16); PS->ANALOG_add(string((const char*)aux_buffer,16),factor_aux,type_aux);
+			aux_buffer += 16; aux_buffer2 += 4;
+		}
+		// DIGITAL
+		for(int chan = 0; chan < digital_n ; chan++){
+			vector<string> aux ;
+			for(int bit = 0; bit < 16 ; bit++){
+				C37_NEED(aux_buffer, 16); aux.push_back(string((const char*)aux_buffer,16)); aux_buffer += 16;
+			}
+			C37_NEED(aux_buffer2, 2); unsigned short msb_normal = ntohs(*(unsigned short*)(aux_buffer2)); aux_buffer2 += 2;
+			C37_NEED(aux_buffer2, 2); unsigned short lsb_valid  = ntohs(*(unsigned short*)(aux_buffer2)); aux_buffer2 += 2;
+			PS->DIGITAL_add(aux,msb_normal,lsb_valid);
+		}
+
+		C37_NEED(aux_buffer2, 2); PS->FNOM_set(ntohs(*(unsigned short*)(aux_buffer2)));   aux_buffer2 += 2;
+		C37_NEED(aux_buffer2, 2); PS->CFGCNT_set(ntohs(*(unsigned short*)(aux_buffer2))); aux_buffer2 += 2;
+
+		aux_buffer = aux_buffer2;
+		this->PMUSTATION_ADD(PS);
+		PS = NULL; // ownership transferred to the station list
+	}
+
+	C37_NEED(aux_buffer2, 2); this->DATA_RATE_set(ntohs(*((unsigned short*)(aux_buffer2)))); aux_buffer2 += 2;
+	C37_NEED(aux_buffer2, 2); this->CHK_set(ntohs(*(unsigned short *)(aux_buffer2)));
+	}
+	#undef C37_NEED
+	return;
+fail:
+	if (PS) delete PS; // free the station being parsed when a malformed frame is rejected
+	return;
 }
 
 /**

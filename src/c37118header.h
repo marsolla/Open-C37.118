@@ -46,7 +46,7 @@ public:
 	*/
 	
 	unsigned short pack(unsigned char **buff);
-	void unpack(unsigned char *buffer);
+	void unpack(unsigned char *buffer, unsigned int buffer_len);
 	
 	/**
 	* DATA STORE

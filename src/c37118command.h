@@ -47,7 +47,7 @@ class CMD_Frame : public C37118{
 	* PACK/UNPACK Methods
 	*/
 	unsigned short pack(unsigned char **buffer);
-	void unpack(unsigned char *buffer);
+	void unpack(unsigned char *buffer, unsigned int buffer_len);
 	
 	/**
 	* DATA STORE

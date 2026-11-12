@@ -285,7 +285,7 @@ void doprocessing (int sock, CONFIG_1_Frame *myconf1, CONFIG_Frame *myconf2, DAT
   //  printf("Buffer Recebido: %x%x\n",buffer[0],buffer[1]);
     if(buffer[0] == A_SYNC_AA){
 		switch(buffer[1]){
-			case  A_SYNC_CMD : cmd->unpack(buffer); 
+			case  A_SYNC_CMD : cmd->unpack(buffer, (unsigned int)n); 
 				select_cmd_action(sock,cmd,myconf1,myconf2,my_data,my_header);
 				break;
 			default: printf ("Unknown Packet\n"); break;
